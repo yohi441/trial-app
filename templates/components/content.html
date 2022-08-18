@@ -3,7 +3,7 @@
     <div class="absolute w-full h-32 bg-gradient-to-b from-gray-100 to-white"></div>
     <div class="relative w-full px-5 py-10 mx-auto sm:py-12 md:py-16 md:px-10 max-w-7xl">
 
-        <h1 class="mb-1 text-4xl font-extrabold leading-none text-gray-900 lg:text-5xl xl:text-6xl sm:mb-3"><a href="#_">The Recipe Blog</a></h1>
+        <h1 class="mb-1 text-4xl font-extrabold leading-none text-gray-800 lg:text-5xl xl:text-6xl sm:mb-3">The Recipe Blog</h1>
         <p class="mb-10 text-lg font-medium text-gray-500 sm:text-2xl">Instruction to make healthy and delicious food</p>
         
         <div class="grid grid-cols-12 col-span-12 gap-7">
@@ -12,18 +12,11 @@
                 <a href="{% url 'detail' recipe.id %}" class="w-full block transition duration-200 ease-out transform hover:scale-110">
                     <img class="object-cover w-full shadow-sm max-h-56" src="{{recipe.get_image}}" loading="lazy">
                 </a>
-                <div class="relative w-full flex flex-col items-start px-6 bg-white border border-t-0 border-gray-200 py-7 rounded-b-2xl">
+                <div class="text-gray-700 relative w-full flex flex-col items-start px-6 bg-white border border-t-0 border-gray-200 py-7 rounded-b-2xl">
                    
                     <h2 class="text-base font-bold sm:text-lg md:text-xl">{{ recipe.name }}</h2>
-                    <p class="font-bold text-xs">Author: {{recipe.author}}</p>
-                    <p>Ingredients</p>
-                    <ul class="list-disc mb-3">
-                        {% for ingredient in recipe.ingredients.all %}
-                        <li class="ml-5">{{ingredient.name}}</li>
-                        {% endfor %}
-                    </ul>
-                    <p>Directions</p>
-                    <p class="mt-2 text-sm">{{ recipe.directions }}</p>
+                    <p class="font-bold text-sm">Author: {{recipe.author}}</p>
+            
                 </div>
             </div>
             {%endfor%}
