@@ -2,6 +2,28 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from account.models import Account
+from recipe.models import Recipe, Ingredient
+
+
+
+class RecipeForm(forms.ModelForm):
+
+    class Meta:
+        model = Recipe
+        fields = [
+            'name',
+            'image',
+            'directions',
+        ]
+
+
+class IngredientForm(forms.ModelForm):
+
+    class Meta:
+        model = Ingredient
+        fields = [
+            'name',
+        ]
 
 
 

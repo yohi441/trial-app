@@ -18,7 +18,9 @@
               List of Recipes
             </h2>
             <div class="mb-5">
+              <a href="{% url 'recipe-form' %}" hx-boost="true" hx-indicator="#my-indicator" >
                 <button class="text-xs text-gray-200 bg-blue-500 py-2 px-2 rounded-full">+ Add Recipe</button>
+              </a>  
             </div>
             
 
@@ -48,14 +50,19 @@
                                 </div>
                                 <div>
                                     
-                                    <a href="#">
+                                    <a href="{% url 'detail' recipe.id %}" hx-boost="true" hx-indicator="#my-indicator">
                                         <p class="font-semibold">{{recipe.name}}</p>
                                     </a>
                                 </div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <button class="text-xs rounded-full bg-red-500 py-2 px-2 text-gray-200">delete</button>
-                                <button class="text-xs rounded-full bg-green-600 py-2 px-2 text-gray-200">update</button>
+                                <form action="{% url 'recipe-delete' recipe.id %}" method="post" hx-boost="true" hx-confirm="Are you sure you want to delete this recipe?" hx-indicator="#my-indicator">
+                                  {% csrf_token %}
+                                  <button type="submit" class="text-xs rounded-full bg-red-500 py-2 px-2 text-gray-200">delete</button>
+                                </form>
+                                <a href="{% url 'recipe-update' recipe.id %}" hx-boost="true", hx-indicator="#my-indicator">
+                                  <button class="text-xs rounded-full bg-green-600 py-2 px-2 text-gray-200">update</button>
+                                </a>
                             </div>
                             
                         </div>

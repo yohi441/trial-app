@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form action="{% url 'recipe-form' %}" method="POST" hx-boost="true" hx-indicator="#my-indicator">
+    {% csrf_token %}
+    {{form.as_p}}
+    {{formset.as_p}}
+
+    <button class="py-2 px-3 border border-gray-400 rounded-md text-sm text-gray-700 hover:bg-gray-400 hover:bg-opacity-50" type="submit">save</button>
+</form>
+
+{% endblock  %}
