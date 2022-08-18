@@ -12,6 +12,14 @@
        
         <main class="h-full overflow-y-auto">
           <div class="container grid px-6 mx-auto">
+            {% if messages %}
+            {% for message in messages%}         
+            <div class="{{ message.tags }} py-2 px-3 text-gray-700 rounded-sm" x-data="{open:true}" x-show="open" x-init="setTimeout(()=>{open=false}, 2000)">
+              {{message}}
+            </div>
+           
+            {% endfor %}
+            {% endif %}
             <h2
               class="my-6 text-2xl font-semibold text-gray-700"
             >

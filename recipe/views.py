@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from recipe.models import Ingredient, Recipe
 from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory
+from django.contrib import messages
 
 
 
@@ -118,13 +119,17 @@ class RecipeFormView(LoginRequiredMixin, View):
     def post(self, request):
         IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), extra=10, can_delete=False, formset=InlineFormSet)
         form = RecipeForm(request.POST)
+
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
             form.save()
-        formset = IngredientFormset(request.POST, instance=instance)
-        if formset.is_valid():
-            formset.save()
+            formset = IngredientFormset(request.POST, instance=instance)
+            if formset.is_valid():
+                formset.save()
+            messages.success(request, "Recipe Create Successfully")
+        else:
+            messages.error(request, "Error Has Occured Please Try Again")
 
         return redirect(reverse('dashboard'))
 
@@ -152,8 +157,11 @@ class RecipeUpdateView(LoginRequiredMixin, View):
         formset = IngredientFormset(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
-        if formset.is_valid():
-            formset.save()
+            if formset.is_valid():
+                formset.save()
+            messages.success(request, "Recipe Updated Successfully")
+        else:
+            messages.error(request, "Error Has Occured Please Try Again")
 
         return redirect(reverse('dashboard'))
 
@@ -161,8 +169,12 @@ class RecipeUpdateView(LoginRequiredMixin, View):
 class DeleteView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
-        recipe = get_object_or_404(Recipe, pk=pk)
-        recipe.delete()
-
+        try:
+            recipe = get_object_or_404(Recipe, pk=pk)
+            recipe.delete()
+            messages.success(request, "Recipe Delete Successfully")
+        except:
+            messages.error(request, "Error Has Occured Please Try Again")
+            
         return redirect(reverse('dashboard'))
 

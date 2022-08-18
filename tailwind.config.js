@@ -3,7 +3,8 @@ module.exports = {
   content: [
     './templates/**/*.html',
     './static/**/*.js',
-    './recipe/forms.py'
+    './recipe/forms.py',
+    './mysite/settings.py'
 ],
   theme: {
     extend: {},
