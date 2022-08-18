@@ -1,13 +1,13 @@
 
 from django.shortcuts import render, redirect
-from recipe.forms import LoginForm, RegisterForm, RecipeForm, IngredientForm
+from recipe.forms import LoginForm, RegisterForm, RecipeForm, InlineFormSet
 from django.contrib.auth import login, logout
 from django.urls import reverse
 from django.views.generic import View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from recipe.models import Ingredient, Recipe
-from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
+from django.forms import inlineformset_factory
 
 
 
@@ -108,10 +108,9 @@ class DetailView(View):
 class RecipeFormView(LoginRequiredMixin, View):
 
     def get(self, request):
+        IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), extra=10, can_delete=False, formset=InlineFormSet)
         form = RecipeForm()
-        ingredient_formset = inlineformset_factory(Recipe, Ingredient, fields=('name',))
-
-        formset = ingredient_formset()
+        formset = IngredientFormset()
         context = {
             'form': form,
             'formset': formset
@@ -119,13 +118,13 @@ class RecipeFormView(LoginRequiredMixin, View):
         return render(request, 'recipe_form.html', context)
 
     def post(self, request):
-        ingredient_formset = inlineformset_factory(Recipe, Ingredient, fields=('name',))
+        IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), extra=10, can_delete=False, formset=InlineFormSet)
         form = RecipeForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
             form.save()
-        formset = ingredient_formset(request.POST, instance=instance)
+        formset = IngredientFormset(request.POST, instance=instance)
         if formset.is_valid():
             formset.save()
 
@@ -135,10 +134,11 @@ class RecipeUpdateView(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
+        IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), formset=InlineFormSet)
         form = RecipeForm(instance=recipe)
-        ingredient_formset = inlineformset_factory(Recipe, Ingredient, fields=('name',))
+        
 
-        formset = ingredient_formset(instance=recipe)
+        formset = IngredientFormset(instance=recipe)
         context = {
             'form': form,
             'formset': formset,
@@ -149,9 +149,9 @@ class RecipeUpdateView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
-        ingredient_formset = inlineformset_factory(Recipe, Ingredient, fields=('name',))
+        IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), formset=InlineFormSet)
         form = RecipeForm(request.POST, instance=recipe)
-        formset = ingredient_formset(request.POST, instance=recipe)
+        formset = IngredientFormset(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
         if formset.is_valid():

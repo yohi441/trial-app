@@ -2,12 +2,21 @@
 
 
 {% block content %}
-<form action="{% url 'recipe-form' %}" method="POST" hx-boost="true" hx-indicator="#my-indicator">
-    {% csrf_token %}
-    {{form.as_p}}
-    {{formset.as_p}}
+<div class="px-4 container mx-auto max-w-xl mb-10">
+    <div class="">
+        <form action="{% url 'recipe-form' %}" method="POST" hx-boost="true" hx-indicator="#my-indicator">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div>
+                Ingredients
+            </div>
+            {{formset.as_p}}
+        
+            <button class="bg-blue-500 mt-10 py-2 px-3 border border-gray-400 rounded-md text-sm text-gray-700 hover:bg-gray-400 hover:bg-opacity-50" type="submit">save</button>
+        </form>
+    </div>
+    
+</div>
 
-    <button class="py-2 px-3 border border-gray-400 rounded-md text-sm text-gray-700 hover:bg-gray-400 hover:bg-opacity-50" type="submit">save</button>
-</form>
 
 {% endblock  %}
