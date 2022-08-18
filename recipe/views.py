@@ -12,15 +12,13 @@ from django.forms import inlineformset_factory
 
 
 
-class IndexView(View):
-
-    def get(self, request):
-        recipes = Recipe.objects.all()
-  
-        context = {
-            'recipes': recipes
-        }
-        return render(request, 'index.html', context)
+class IndexView(ListView):
+    model = Recipe
+    template_name = "index.html"
+    paginate_by = 6
+    context_object_name = 'recipes'
+    ordering = ['created']
+    
 
 
 class SigninView(View):
