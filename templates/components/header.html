@@ -1,35 +1,71 @@
 <!-- Header -->
-<section class="w-full px-8 text-gray-700 bg-white">
+<div x-data="{open:false}">
+
+<div @click="open=!open"  class="z-50 cursor-pointer py-3 px-3 md:hidden fixed top-4 right-5 hover:bg-gray-300">
+    <svg class="w-6 h-6 fill-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+    </svg>
+</div>
+<section class="sw-full px-8 text-gray-700 bg-white">
     <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
         <div class="relative flex flex-col md:flex-row">
             <a href="{% url 'index' %}" hx-boost="true" hx-indicator="#my-indicator" class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
                 <span class="mx-auto text-xl font-black leading-none text-gray-900 select-none">Recipe App</span>
             </a>
+            
             <nav class="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
                 {% if user.is_authenticated %}
-                <a href="{% url 'dashboard' %}" hx-boost="true" hx-indicator="#my-indicator" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Dashboard</a>
+                <a href="{% url 'dashboard' %}" hx-boost="true" hx-indicator="#my-indicator" class="hidden md:inline mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Dashboard</a>
                 {%endif%}
-                <a href="{% url 'index' %}" hx-boost="true" hx-indicator="#my-indicator" class="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Blog</a>
+                <a href="{% url 'index' %}" hx-boost="true" hx-indicator="#my-indicator" class="hidden md:inline mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900">Blog</a>
             </nav>
         </div>
 
         <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
             {% if user.is_authenticated %}
-            <p>
+            <p class="hidden md:inline">
                 Welcome {{request.user|title}}
             </p>
-            <a href="{% url 'signout' %}" hx-confirm="Are you sure you want to sign out?" hx-boost="true" hx-indicator="#my-indicator" class="border border-gray-400 rounded-md py-2 px-3 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900 hover:bg-gray-300">
+            <a href="{% url 'signout' %}" hx-confirm="Are you sure you want to sign out?" hx-boost="true" hx-indicator="#my-indicator" class="hidden md:inline border border-gray-400 rounded-md py-2 px-3 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900 hover:bg-gray-300">
                 Sign out
             </a>
             {% else %}
-            <a href="{% url 'signin' %}" hx-boost="true" hx-indicator="#my-indicator" class="text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
+            <a href="{% url 'signin' %}" hx-boost="true" hx-indicator="#my-indicator" class="hidden md:inline text-base font-medium leading-6 text-gray-600 whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-900">
                 Sign in
             </a>
-            <a href="{% url 'signup' %}" hx-boost="true" hx-indicator="#my-indicator" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+            <a href="{% url 'signup' %}" hx-boost="true" hx-indicator="#my-indicator" class="hidden md:inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
                 Sign up
             </a>
             {% endif %}
            
         </div>
     </div>
+    
 </section>
+<div @click.away="open=false" x-show="open" x-cloak class="overflow-hidden bg-white p-5 top-0 z-40 fixed w-full md:hidden">
+    <ul>
+        {% if user.is_authenticated %}
+        <li class="ml-2 font-bold text-lg mb-3">Welcome {{request.user|title}}</li>
+        {% endif %}
+        <a href="{% url 'index' %}" hx-boost="true" hx-indicator="#my-indicator">
+        <li class="ml-2 font-bold mb-2">Blog</li>
+        </a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" hx-boost="true" hx-indicator="#my-indicator">
+        <li class="ml-2 font-bold">Dashboard</li>
+        </a>
+        <a href="{% url 'signout' %}" hx-confirm="Are you sure you want to sign out?" hx-boost="true" hx-indicator="#my-indicator">
+        <li class="px-3 mt-10 py-2 hover:bg-gray-300 rounded-md border border-gray-700">Sign Out</li>
+        </a>
+        {% else %}
+        <a href="{% url 'signin' %}" hx-boost="true" hx-indicator="#my-indicator">
+        <li class="mb-3 mt-10 hover:bg-gray-300 px-3 py-2 rounded-md border border-gray-700">Sign In</li>
+        </a>
+        <a href="{% url 'signup' %}" hx-boost="true" hx-indicator="#my-indicator">
+        <li class="px-3 py-2 hover:bg-gray-300 rounded-md border border-gray-700">Sign Up</li>
+        </a>
+        {% endif %}
+
+    </ul>
+</div>
+</div>
