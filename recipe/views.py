@@ -1,9 +1,10 @@
+from sqlite3 import DatabaseError
 from django.shortcuts import render, redirect
 import recipe
 from recipe.forms import LoginForm, RegisterForm
 from django.contrib.auth import login, logout
 from django.urls import reverse
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from recipe.models import Recipe
 
@@ -81,15 +82,16 @@ class SignupSuccessView(View):
         return render(request, 'signup_success.html', {})
 
 
-class DashboardView(LoginRequiredMixin, View):
+class DashboardView(LoginRequiredMixin, ListView):
 
-    def get(self, request):
-        recipes = Recipe.objects.filter(author=request.user.id)
-        print(recipes)
-        context = {
-            'recipes': recipes,
-        }
-        return render(request, 'dashboard.html', context)
+    def get_queryset(self):
+        return Recipe.objects.filter(author=self.request.user)
+
+    model = Recipe
+    template_name = "dashboard.html"
+    paginate_by = 10
+    context_object_name = 'recipes'
+    ordering = ['-created']
 
 
 class DetailView(View):
