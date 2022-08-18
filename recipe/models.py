@@ -16,7 +16,7 @@ class Recipe(models.Model):
     @property
     def get_image(self):
         if not self.image:
-            return 'media/uploads/placeholder-image.png'
+            return '/media/uploads/placeholder-image.png'
         return self.image.url
 
 

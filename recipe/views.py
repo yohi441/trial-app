@@ -92,9 +92,13 @@ class DashboardView(LoginRequiredMixin, View):
         return render(request, 'dashboard.html', context)
 
 
-class DetailView(LoginRequiredMixin, View):
+class DetailView(View):
 
 
-    def get(self, request):
-        return render(request, 'detail_view.html', {})
+    def get(self, request, pk):
+        recipe = Recipe.objects.get(pk=pk)
+        context = {
+            'recipe': recipe
+        }
+        return render(request, 'detail_view.html', context)
 
