@@ -18,10 +18,6 @@ def api_root(request, format=None):
     'user-recipe-list': reverse('recipe-list', request=request, format=format)
 })
 
-class RecipeList(generics.ListCreateAPIView):
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    name = 'recipe-list'
 
 class RecipeAllList(generics.ListAPIView):
     queryset = Recipe.objects.all()
