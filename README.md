@@ -65,7 +65,14 @@ password: testpassword
 | --- | --- | --- |
 | GET | /api/ | Retrieve list of URL of recipe list |
 | GET | /api/recipes/all/ | Retrieve list of all recipes of all users |
-
+| GET | /api/recipe/detail/{id}/ | Retrieve a single recipe |
+| GET | /api/recipe/list/ |  Retrieve a list of recipes of the user must provide basic authentication |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
 METHOD           URI                           SEMANTICS
 
 GET        /api/                     Retrieve list of URL of recipe list
