@@ -612,36 +612,12 @@ video {
   top: 0px;
 }
 
-.right-0 {
-  right: 0px;
-}
-
-.right-5 {
-  right: 1.25rem;
-}
-
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-10 {
-  top: 2.5rem;
-}
-
-.top-14 {
-  top: 3.5rem;
-}
-
 .top-4 {
   top: 1rem;
 }
 
-.top-16 {
-  top: 4rem;
-}
-
-.top-20 {
-  top: 5rem;
+.right-5 {
+  right: 1.25rem;
 }
 
 .z-20 {
@@ -746,16 +722,12 @@ video {
   margin-top: -0.75rem;
 }
 
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .block {
@@ -822,16 +794,22 @@ video {
   height: auto;
 }
 
-.h-7 {
-  height: 1.75rem;
-}
-
 .h-6 {
   height: 1.5rem;
 }
 
 .max-h-56 {
   max-height: 14rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-h-min {
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
 }
 
 .w-full {
@@ -1055,24 +1033,9 @@ video {
   border-color: rgb(254 240 138 / var(--tw-border-opacity));
 }
 
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
-.border-gray-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
 .border-gray-700 {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
-}
-
-.border-gray-900 {
-  --tw-border-opacity: 1;
-  border-color: rgb(17 24 39 / var(--tw-border-opacity));
 }
 
 .border-b-gray-300 {
@@ -1181,12 +1144,12 @@ video {
   fill: currentColor;
 }
 
-.fill-blue-600 {
-  fill: #2563eb;
-}
-
 .fill-gray-700 {
   fill: #374151;
+}
+
+.fill-blue-600 {
+  fill: #2563eb;
 }
 
 .object-cover {
@@ -1487,11 +1450,6 @@ video {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -1669,10 +1627,6 @@ video {
 
   .sm\:mb-5 {
     margin-bottom: 1.25rem;
-  }
-
-  .sm\:inline {
-    display: inline;
   }
 
   .sm\:h-full {

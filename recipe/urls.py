@@ -1,13 +1,14 @@
 from django.urls import path, include
 from recipe import views, api_views
+from account import views as account_views
 
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('signup/', views.SignupView.as_view(), name='signup'),
-    path('signin/', views.SigninView.as_view(), name='signin'),
-    path('signout/', views.SignoutView.as_view(), name='signout'),
-    path('success/', views.SignupSuccessView.as_view(), name='success'),
+    path('signup/', account_views.SignupView.as_view(), name='signup'),
+    path('signin/', account_views.SigninView.as_view(), name='signin'),
+    path('signout/', account_views.SignoutView.as_view(), name='signout'),
+    path('success/', account_views.SignupSuccessView.as_view(), name='success'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('detail/<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('recipe/form/', views.RecipeFormView.as_view(), name='recipe-form'),
