@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-suc#=a5gs)r9$0vb5f8d6r1$sa5o5mre)i8%o8fuap=xhhvzyz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recipe',
     'account',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,14 @@ AUTH_USER_MODEL = 'account.Account'
 MESSAGE_TAGS = {
     messages.SUCCESS: 'bg-green-500',
     messages.ERROR: 'bg-red-500'
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }

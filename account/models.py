@@ -1,7 +1,7 @@
-import email
-from signal import raise_signal
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 
 
 
@@ -40,7 +40,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser):
+class Account(AbstractBaseUser, PermissionsMixin):
     """
         Custom user class inheriting AbstractBaseUser class
     """

@@ -55,14 +55,14 @@
         <li class="ml-2 font-bold">Dashboard</li>
         </a>
         <a href="{% url 'signout' %}" hx-confirm="Are you sure you want to sign out?" hx-boost="true" hx-indicator="#my-indicator">
-        <li class="px-3 mt-10 py-2 hover:bg-gray-300 rounded-md border border-gray-700">Sign Out</li>
+        <li class="px-3 mt-10 mb-10 py-2 hover:bg-gray-300 rounded-md border border-gray-700">Sign Out</li>
         </a>
         {% else %}
         <a href="{% url 'signin' %}" hx-boost="true" hx-indicator="#my-indicator">
         <li class="mb-3 mt-10 hover:bg-gray-300 px-3 py-2 rounded-md border border-gray-700">Sign In</li>
         </a>
         <a href="{% url 'signup' %}" hx-boost="true" hx-indicator="#my-indicator">
-        <li class="px-3 py-2 hover:bg-gray-300 rounded-md border border-gray-700">Sign Up</li>
+        <li class="px-3 py-2 mb-10 hover:bg-gray-300 rounded-md border border-gray-700">Sign Up</li>
         </a>
         {% endif %}
 
