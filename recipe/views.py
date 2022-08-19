@@ -59,7 +59,7 @@ class RecipeFormView(LoginRequiredMixin, View):
 
     def post(self, request):
         IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), extra=10, can_delete=False, formset=InlineFormSet)
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
 
         if form.is_valid():
             instance = form.save(commit=False)
@@ -95,7 +95,7 @@ class RecipeUpdateView(LoginRequiredMixin, View):
     def post(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
         IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), formset=InlineFormSet)
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
         formset = IngredientFormset(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
