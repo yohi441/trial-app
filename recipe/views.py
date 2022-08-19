@@ -29,7 +29,7 @@ class DashboardView(LoginRequiredMixin, ListView):
 
     model = Recipe
     template_name = "dashboard.html"
-    paginate_by = 10
+    paginate_by = 5
     context_object_name = 'recipes'
     ordering = ['-created']
 
