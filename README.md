@@ -67,33 +67,16 @@ password: testpassword
 | GET | /api/recipes/all/ | Retrieve list of all recipes of all users |
 | GET | /api/recipe/detail/{id}/ | Retrieve a single recipe |
 | GET | /api/recipe/list/ |  Retrieve a list of recipes of the user must provide basic authentication |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-METHOD           URI                           SEMANTICS
+| POST | /api/recipe/list/ | Create a new recipe of the user must provide basic authentication |
+| GET | /api/recipe/{id}/ | Retrieve a single recipe of the user must provide basic authentication |
+| PUT | /api/recipe/{id}/ | Update an existing recipe of the user must provide basic authentication |
+| DELETE | /api/recipe/{id}/ | Delete an existing recipe of the user must provide basic authentication |
+               
 
-GET        /api/                     Retrieve list of URL of recipe list
+                 
 
-GET        /api/recipes/all/         Retrieve list of all recipes of all users
+                
 
-GET        /api/recipe/detail/{id}/  Retrieve a single recipe
-
-GET        /api/recipe/list/         Retrieve a list of recipes of the user
-                                     must provide basic authentication
-
-POST       /api/recipe/list/         Create a new recipe of the user
-                                     must provide basic authentication
-
-GET        /api/recipe/{id}/         Retrieve a single recipe of the user
-                                     must provide basic authentication
-
-PUT        /api/recipe/{id}/         Update an existing recipe of the user
-                                     must provide basic authentication
-
-DELETE     /api/recipe/{id}/         Delete an existing recipe of the user
-                                     must provide basic authentication
+              
 
 
