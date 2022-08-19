@@ -22,6 +22,7 @@ class IndexView(ListView):
 
 
 class DashboardView(LoginRequiredMixin, ListView):
+    login_url = '/signin/'
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user)
@@ -44,6 +45,7 @@ class DetailView(View):
 
 
 class RecipeFormView(LoginRequiredMixin, View):
+    login_url = '/signin/'
 
     def get(self, request):
         IngredientFormset = inlineformset_factory(Recipe, Ingredient, fields=('name',), extra=10, can_delete=False, formset=InlineFormSet)
@@ -73,6 +75,7 @@ class RecipeFormView(LoginRequiredMixin, View):
         return redirect(reverse('dashboard'))
 
 class RecipeUpdateView(LoginRequiredMixin, View):
+    login_url = '/signin/'
 
     def get(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
@@ -106,6 +109,7 @@ class RecipeUpdateView(LoginRequiredMixin, View):
 
 
 class DeleteView(LoginRequiredMixin, View):
+    login_url = '/signin/'
 
     def post(self, request, pk):
         try:
