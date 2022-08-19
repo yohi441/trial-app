@@ -62,7 +62,7 @@ password: testpassword
 
 
 | METHOD | URI | SEMANTICS |
-| --- | --- |
+| --- | --- | --- |
 | GET | /api/ | Retrieve list of URL of recipe list |
 | GET | /api/recipes/all/ | Retrieve list of all recipes of all users |
 
